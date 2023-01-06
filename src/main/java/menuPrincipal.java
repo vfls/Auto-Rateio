@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
-
 public class menuPrincipal extends JFrame {
     JFrame f = new JFrame("Bosta");
 
@@ -23,6 +22,8 @@ public class menuPrincipal extends JFrame {
 
     private JButton lerPlanilhaButton;
     private JPanel mainPanel;
+    private JList mostrarArray;
+    private JTextField textField1;
     public JButton getExecutarButton;
 
     public menuPrincipal(String title) {
@@ -45,7 +46,6 @@ public class menuPrincipal extends JFrame {
             }
         });
     }
-
     public static void main(String[] args) throws FileNotFoundException {
         Planilha Planilha = new Planilha();
         Planilha.lerCSV();
@@ -54,3 +54,5 @@ public class menuPrincipal extends JFrame {
 
     }
 }
+
+
