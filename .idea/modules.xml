@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Rateio.iml" filepath="$PROJECT_DIR$/Rateio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Auto-Rateio.iml" filepath="$PROJECT_DIR$/.idea/Auto-Rateio.iml" />
     </modules>
   </component>
 </project>

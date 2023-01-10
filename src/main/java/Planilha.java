@@ -2,9 +2,14 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,16 +51,21 @@ public class Planilha {
     }
 
     public void escreverXLSX(String [] csv) throws IOException {
-        FileInputStream file = new FileInputStream(new File(String.valueOf("src/main/resources/Rateio Dezembro.xlsx")));
-        Workbook workbook = WorkbookFactory.create(file);
-        Sheet sheet = workbook.getSheet("src/main/resources/Rateio Dezembro.xlsx");
-        String[] parts;
-        //parts = csv.split(",");
-        for (int i = 0; i < 5; i++) {
-            
+        FileInputStream file = new FileInputStream(new File("src/main/resources/Rateio Dezembro.xlsx"));
+        Workbook workbook = new XSSFWorkbook(file);
+        Sheet sheet = workbook.getSheetAt(0);
+        for (int i = 0; i < ; i++) {
+            for (int j = 0; j < ; j++) {
+
+                Row row = sheet.getRow(4);
+                Cell cell = row.getCell(1);
+                cell.setCellValue(csv[i]);
+            }
         }
-
-
+        FileOutputStream outputStream = new FileOutputStream(("src/main/resources/Rateio Dezembro.xlsx"));
+        workbook.write(outputStream);
+        workbook.close();
+        outputStream.close();
     }
 }
 
