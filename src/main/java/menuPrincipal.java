@@ -3,9 +3,14 @@ import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class menuPrincipal extends JFrame {
-    JFrame f = new JFrame("Bosta");
+    JFrame f = new JFrame("teste");
 
     String v;
     private JTextField tx15;
@@ -31,27 +36,17 @@ public class menuPrincipal extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setContentPane(mainPanel);
         this.pack();
-        executarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-
-            }
-        });
-
-        lerPlanilhaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
     }
-    public static void main(String[] args) throws FileNotFoundException {
-        Planilha Planilha = new Planilha();
-        Planilha.lerCSV();
-        JFrame f = new menuPrincipal("merda");
-        f.setVisible(true);
 
+    public static void main(String[] args) throws IOException {
+        FileReader file = new FileReader("src/main/resources/print_summary_by_group(9).csv");
+        ArrayList<String[]> csv =  new ArrayList<>();
+        Planilha Planilha = new Planilha();
+        csv = Planilha.lerCSV();
+        Planilha.escreverXLSX(csv);
+
+        JFrame f = new menuPrincipal("teste");
+        f.setVisible(true);
     }
 }
 
