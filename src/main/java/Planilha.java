@@ -2,6 +2,7 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
+import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 
@@ -26,6 +27,10 @@ public class Planilha {
             reader.close();
 
             ArrayList<String[]> data = new ArrayList<>(rows);
+            for (int i = 0;i< data.size();i++) {
+                String read = Arrays.toString(data.get(i));
+                System.out.println(read);
+            }
             return data;
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -51,26 +56,27 @@ public class Planilha {
         }
 
     public static void escreverXLSX(List<String[]> data) throws IOException {
-        FileInputStream file = new FileInputStream(new File("src/main/resources/Rateio Dezembro.xlsx"));
-        Workbook workbook = new XSSFWorkbook(file);
-        Sheet sheet = workbook.getSheetAt(0);
-        for (int i = 4; i < 13; ) {
-            for (int j = 0; j < data.size(); j++) {
-                Row row = sheet.getRow(4);
-                Cell cell = row.getCell(0);
-                row.setRowNum(i);
-                String readCell = Arrays.toString(data.get(j));
-                cell.setCellValue(readCell);
-                if (j % 9 == 0) {
-                    i++;
+        //adicionar try e catch
+            FileInputStream file = new FileInputStream(new File("src/main/resources/Rateio Dezembro.xlsx"));
+            Workbook workbook = new XSSFWorkbook(file);
+            Sheet sheet = workbook.getSheetAt(0);
+            for (int i = 4; i < 13; ) {
+                for (int j = 0; j < data.size(); j++) {
+                    if (j % 9 == 0) {
+                        i++;
+                    }
+                    Row row = sheet.getRow(4);
+                    Cell cell = row.getCell(0);
+                    String readCell = Arrays.toString(data.get(j));
+                    cell.setCellValue(readCell);
                 }
             }
+            FileOutputStream outputStream = new FileOutputStream("src/main/resources/Rateio Dezembro.xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
         }
-        FileOutputStream outputStream = new FileOutputStream(("src/main/resources/Rateio Dezembro.xlsx"));
-        workbook.write(outputStream);
-        workbook.close();
-        outputStream.close();
     }
-}
+
 
 
