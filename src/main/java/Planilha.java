@@ -56,7 +56,8 @@ public class Planilha {
         }
 
     public static void escreverXLSX(List<String[]> data) throws IOException {
-        //adicionar try e catch
+
+
             FileInputStream file = new FileInputStream(new File("src/main/resources/Rateio Dezembro.xlsx"));
             Workbook workbook = new XSSFWorkbook(file);
             Sheet sheet = workbook.getSheetAt(0);
